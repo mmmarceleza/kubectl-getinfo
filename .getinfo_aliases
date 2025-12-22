@@ -1,0 +1,973 @@
+# kubectl-getinfo aliases
+# Generated aliases for kubectl-getinfo plugin
+# Similar to https://github.com/ahmetb/kubectl-aliases
+#
+# Usage: Add the following to your .bashrc or .zshrc:
+#   [ -f /path/to/.getinfo_aliases ] && source /path/to/.getinfo_aliases
+#
+# Syntax:
+#   kgi  = kubectl getinfo
+#   l    = labels
+#   a    = annotations
+#   o    = owner
+#   s    = scheduling
+#
+# Scheduling subcommands:
+#   t    = tolerations
+#   af   = affinity
+#   ns   = nodeselector
+#   r    = resources
+#   tp   = topology
+#   pr   = priority
+#   rt   = runtime
+#
+# Resources:
+#   p    = pods
+#   d    = deploy (deployments)
+#   svc  = services
+#   no   = nodes
+#   cm   = configmaps
+#   sec  = secrets
+#   sts  = statefulsets
+#   ds   = daemonsets
+#   rs   = replicasets
+#   cj   = cronjobs
+#   j    = jobs
+#   ing  = ingresses
+#   pv   = persistentvolumes
+#   pvc  = persistentvolumeclaims
+#
+# Flags (at the end):
+#   n      = -n (namespace, requires value after)
+#   l      = -l (selector, requires value after)
+#   A      = -A (all namespaces)
+#   oyaml  = -o yaml
+#   ojson  = -o json
+#   otable = -o table
+#   c      = -c (colorize JSON)
+#
+# Examples:
+#   kgilp        = kubectl getinfo labels pods
+#   kgilpoyaml   = kubectl getinfo labels pods -o yaml
+#   kgilpA       = kubectl getinfo labels pods -A
+#   kgilpn       = kubectl getinfo labels pods -n
+#   kgilpl       = kubectl getinfo labels pods -l
+#   kgistp       = kubectl getinfo scheduling tolerations pods
+#   kgistpAoyaml = kubectl getinfo scheduling tolerations pods -A -o yaml
+
+# =============================================================================
+# Base alias
+# =============================================================================
+alias kgi='kubectl getinfo'
+
+# =============================================================================
+# LABELS (kgil)
+# =============================================================================
+
+# Pods
+alias kgilp='kubectl getinfo labels pods'
+alias kgilpn='kubectl getinfo labels pods -n'
+alias kgilpl='kubectl getinfo labels pods -l'
+alias kgilpnl='kubectl getinfo labels pods -n'
+alias kgilpA='kubectl getinfo labels pods -A'
+alias kgilpoyaml='kubectl getinfo labels pods -o yaml'
+alias kgilpojson='kubectl getinfo labels pods -o json'
+alias kgilpotable='kubectl getinfo labels pods -o table'
+alias kgilpAoyaml='kubectl getinfo labels pods -A -o yaml'
+alias kgilpAojson='kubectl getinfo labels pods -A -o json'
+alias kgilpAotable='kubectl getinfo labels pods -A -o table'
+alias kgilpc='kubectl getinfo labels pods -c'
+alias kgilpAc='kubectl getinfo labels pods -A -c'
+
+# Deployments
+alias kgild='kubectl getinfo labels deploy'
+alias kgildn='kubectl getinfo labels deploy -n'
+alias kgildl='kubectl getinfo labels deploy -l'
+alias kgildA='kubectl getinfo labels deploy -A'
+alias kgildoyaml='kubectl getinfo labels deploy -o yaml'
+alias kgildojson='kubectl getinfo labels deploy -o json'
+alias kgildotable='kubectl getinfo labels deploy -o table'
+alias kgildAoyaml='kubectl getinfo labels deploy -A -o yaml'
+alias kgildAojson='kubectl getinfo labels deploy -A -o json'
+alias kgildAotable='kubectl getinfo labels deploy -A -o table'
+alias kgildc='kubectl getinfo labels deploy -c'
+alias kgildAc='kubectl getinfo labels deploy -A -c'
+
+# Services
+alias kgilsvc='kubectl getinfo labels svc'
+alias kgilsvcn='kubectl getinfo labels svc -n'
+alias kgilsvcl='kubectl getinfo labels svc -l'
+alias kgilsvcA='kubectl getinfo labels svc -A'
+alias kgilsvcoyaml='kubectl getinfo labels svc -o yaml'
+alias kgilsvcojson='kubectl getinfo labels svc -o json'
+alias kgilsvcotable='kubectl getinfo labels svc -o table'
+alias kgilsvcAoyaml='kubectl getinfo labels svc -A -o yaml'
+alias kgilsvcAojson='kubectl getinfo labels svc -A -o json'
+alias kgilsvcAotable='kubectl getinfo labels svc -A -o table'
+alias kgilsvcc='kubectl getinfo labels svc -c'
+alias kgilsvcAc='kubectl getinfo labels svc -A -c'
+
+# Nodes
+alias kgilno='kubectl getinfo labels nodes'
+alias kgilnol='kubectl getinfo labels nodes -l'
+alias kgilnooyaml='kubectl getinfo labels nodes -o yaml'
+alias kgilnoojson='kubectl getinfo labels nodes -o json'
+alias kgilnootable='kubectl getinfo labels nodes -o table'
+alias kgilnoc='kubectl getinfo labels nodes -c'
+
+# ConfigMaps
+alias kgilcm='kubectl getinfo labels cm'
+alias kgilcmn='kubectl getinfo labels cm -n'
+alias kgilcml='kubectl getinfo labels cm -l'
+alias kgilcmA='kubectl getinfo labels cm -A'
+alias kgilcmoyaml='kubectl getinfo labels cm -o yaml'
+alias kgilcmojson='kubectl getinfo labels cm -o json'
+alias kgilcmotable='kubectl getinfo labels cm -o table'
+alias kgilcmAoyaml='kubectl getinfo labels cm -A -o yaml'
+alias kgilcmAojson='kubectl getinfo labels cm -A -o json'
+alias kgilcmAotable='kubectl getinfo labels cm -A -o table'
+alias kgilcmc='kubectl getinfo labels cm -c'
+alias kgilcmAc='kubectl getinfo labels cm -A -c'
+
+# Secrets
+alias kgilsec='kubectl getinfo labels secrets'
+alias kgilsecn='kubectl getinfo labels secrets -n'
+alias kgilsecl='kubectl getinfo labels secrets -l'
+alias kgilsecA='kubectl getinfo labels secrets -A'
+alias kgilsecoyaml='kubectl getinfo labels secrets -o yaml'
+alias kgilsecojson='kubectl getinfo labels secrets -o json'
+alias kgilsecotable='kubectl getinfo labels secrets -o table'
+alias kgilsecAoyaml='kubectl getinfo labels secrets -A -o yaml'
+alias kgilsecAojson='kubectl getinfo labels secrets -A -o json'
+alias kgilsecAotable='kubectl getinfo labels secrets -A -o table'
+alias kgilsecc='kubectl getinfo labels secrets -c'
+alias kgilsecAc='kubectl getinfo labels secrets -A -c'
+
+# StatefulSets
+alias kgilsts='kubectl getinfo labels sts'
+alias kgilstsn='kubectl getinfo labels sts -n'
+alias kgilstsl='kubectl getinfo labels sts -l'
+alias kgilstsA='kubectl getinfo labels sts -A'
+alias kgilstsoyaml='kubectl getinfo labels sts -o yaml'
+alias kgilstsojson='kubectl getinfo labels sts -o json'
+alias kgilstsotable='kubectl getinfo labels sts -o table'
+alias kgilstsAoyaml='kubectl getinfo labels sts -A -o yaml'
+alias kgilstsAojson='kubectl getinfo labels sts -A -o json'
+alias kgilstsAotable='kubectl getinfo labels sts -A -o table'
+alias kgilstsc='kubectl getinfo labels sts -c'
+alias kgilstsAc='kubectl getinfo labels sts -A -c'
+
+# DaemonSets
+alias kgilds='kubectl getinfo labels ds'
+alias kgildsn='kubectl getinfo labels ds -n'
+alias kgildsl='kubectl getinfo labels ds -l'
+alias kgildsA='kubectl getinfo labels ds -A'
+alias kgildsoyaml='kubectl getinfo labels ds -o yaml'
+alias kgildsojson='kubectl getinfo labels ds -o json'
+alias kgildsotable='kubectl getinfo labels ds -o table'
+alias kgildsAoyaml='kubectl getinfo labels ds -A -o yaml'
+alias kgildsAojson='kubectl getinfo labels ds -A -o json'
+alias kgildsAotable='kubectl getinfo labels ds -A -o table'
+alias kgildsc='kubectl getinfo labels ds -c'
+alias kgildsAc='kubectl getinfo labels ds -A -c'
+
+# ReplicaSets
+alias kgilrs='kubectl getinfo labels rs'
+alias kgilrsn='kubectl getinfo labels rs -n'
+alias kgilrsl='kubectl getinfo labels rs -l'
+alias kgilrsA='kubectl getinfo labels rs -A'
+alias kgilrsoyaml='kubectl getinfo labels rs -o yaml'
+alias kgilrsojson='kubectl getinfo labels rs -o json'
+alias kgilrsotable='kubectl getinfo labels rs -o table'
+alias kgilrsAoyaml='kubectl getinfo labels rs -A -o yaml'
+alias kgilrsAojson='kubectl getinfo labels rs -A -o json'
+alias kgilrsAotable='kubectl getinfo labels rs -A -o table'
+alias kgilrsc='kubectl getinfo labels rs -c'
+alias kgilrsAc='kubectl getinfo labels rs -A -c'
+
+# CronJobs
+alias kgilcj='kubectl getinfo labels cj'
+alias kgilcjn='kubectl getinfo labels cj -n'
+alias kgilcjl='kubectl getinfo labels cj -l'
+alias kgilcjA='kubectl getinfo labels cj -A'
+alias kgilcjoyaml='kubectl getinfo labels cj -o yaml'
+alias kgilcjojson='kubectl getinfo labels cj -o json'
+alias kgilcjotable='kubectl getinfo labels cj -o table'
+alias kgilcjAoyaml='kubectl getinfo labels cj -A -o yaml'
+alias kgilcjAojson='kubectl getinfo labels cj -A -o json'
+alias kgilcjAotable='kubectl getinfo labels cj -A -o table'
+alias kgilcjc='kubectl getinfo labels cj -c'
+alias kgilcjAc='kubectl getinfo labels cj -A -c'
+
+# Jobs
+alias kgilj='kubectl getinfo labels jobs'
+alias kgiljn='kubectl getinfo labels jobs -n'
+alias kgiljl='kubectl getinfo labels jobs -l'
+alias kgiljA='kubectl getinfo labels jobs -A'
+alias kgiljoyaml='kubectl getinfo labels jobs -o yaml'
+alias kgiljojson='kubectl getinfo labels jobs -o json'
+alias kgiljotable='kubectl getinfo labels jobs -o table'
+alias kgiljAoyaml='kubectl getinfo labels jobs -A -o yaml'
+alias kgiljAojson='kubectl getinfo labels jobs -A -o json'
+alias kgiljAotable='kubectl getinfo labels jobs -A -o table'
+alias kgiljc='kubectl getinfo labels jobs -c'
+alias kgiljAc='kubectl getinfo labels jobs -A -c'
+
+# Ingresses
+alias kgiling='kubectl getinfo labels ing'
+alias kgilingn='kubectl getinfo labels ing -n'
+alias kgilingl='kubectl getinfo labels ing -l'
+alias kgilingA='kubectl getinfo labels ing -A'
+alias kgilingoyaml='kubectl getinfo labels ing -o yaml'
+alias kgilingojson='kubectl getinfo labels ing -o json'
+alias kgilingotable='kubectl getinfo labels ing -o table'
+alias kgilingAoyaml='kubectl getinfo labels ing -A -o yaml'
+alias kgilingAojson='kubectl getinfo labels ing -A -o json'
+alias kgilingAotable='kubectl getinfo labels ing -A -o table'
+alias kgilingc='kubectl getinfo labels ing -c'
+alias kgilingAc='kubectl getinfo labels ing -A -c'
+
+# PersistentVolumes
+alias kgilpv='kubectl getinfo labels pv'
+alias kgilpvl='kubectl getinfo labels pv -l'
+alias kgilpvoyaml='kubectl getinfo labels pv -o yaml'
+alias kgilpvojson='kubectl getinfo labels pv -o json'
+alias kgilpvotable='kubectl getinfo labels pv -o table'
+alias kgilpvc='kubectl getinfo labels pv -c'
+
+# PersistentVolumeClaims
+alias kgilpvc='kubectl getinfo labels pvc'
+alias kgilpvcn='kubectl getinfo labels pvc -n'
+alias kgilpvcl='kubectl getinfo labels pvc -l'
+alias kgilpvcA='kubectl getinfo labels pvc -A'
+alias kgilpvcoyaml='kubectl getinfo labels pvc -o yaml'
+alias kgilpvcojson='kubectl getinfo labels pvc -o json'
+alias kgilpvcotable='kubectl getinfo labels pvc -o table'
+alias kgilpvcAoyaml='kubectl getinfo labels pvc -A -o yaml'
+alias kgilpvcAojson='kubectl getinfo labels pvc -A -o json'
+alias kgilpvcAotable='kubectl getinfo labels pvc -A -o table'
+alias kgilpvcc='kubectl getinfo labels pvc -c'
+alias kgilpvcAc='kubectl getinfo labels pvc -A -c'
+
+# =============================================================================
+# ANNOTATIONS (kgia)
+# =============================================================================
+
+# Pods
+alias kgiap='kubectl getinfo annotations pods'
+alias kgiapn='kubectl getinfo annotations pods -n'
+alias kgiapl='kubectl getinfo annotations pods -l'
+alias kgiapnl='kubectl getinfo annotations pods -n'
+alias kgiapA='kubectl getinfo annotations pods -A'
+alias kgiapoyaml='kubectl getinfo annotations pods -o yaml'
+alias kgiapojson='kubectl getinfo annotations pods -o json'
+alias kgiapotable='kubectl getinfo annotations pods -o table'
+alias kgiapAoyaml='kubectl getinfo annotations pods -A -o yaml'
+alias kgiapAojson='kubectl getinfo annotations pods -A -o json'
+alias kgiapAotable='kubectl getinfo annotations pods -A -o table'
+alias kgiapc='kubectl getinfo annotations pods -c'
+alias kgiapAc='kubectl getinfo annotations pods -A -c'
+
+# Deployments
+alias kgiad='kubectl getinfo annotations deploy'
+alias kgiadn='kubectl getinfo annotations deploy -n'
+alias kgiadl='kubectl getinfo annotations deploy -l'
+alias kgiadA='kubectl getinfo annotations deploy -A'
+alias kgiadoyaml='kubectl getinfo annotations deploy -o yaml'
+alias kgiadojson='kubectl getinfo annotations deploy -o json'
+alias kgiadotable='kubectl getinfo annotations deploy -o table'
+alias kgiadAoyaml='kubectl getinfo annotations deploy -A -o yaml'
+alias kgiadAojson='kubectl getinfo annotations deploy -A -o json'
+alias kgiadAotable='kubectl getinfo annotations deploy -A -o table'
+alias kgiadc='kubectl getinfo annotations deploy -c'
+alias kgiadAc='kubectl getinfo annotations deploy -A -c'
+
+# Services
+alias kgiasvc='kubectl getinfo annotations svc'
+alias kgiasvcn='kubectl getinfo annotations svc -n'
+alias kgiasvcl='kubectl getinfo annotations svc -l'
+alias kgiasvcA='kubectl getinfo annotations svc -A'
+alias kgiasvcoyaml='kubectl getinfo annotations svc -o yaml'
+alias kgiasvcojson='kubectl getinfo annotations svc -o json'
+alias kgiasvcotable='kubectl getinfo annotations svc -o table'
+alias kgiasvcAoyaml='kubectl getinfo annotations svc -A -o yaml'
+alias kgiasvcAojson='kubectl getinfo annotations svc -A -o json'
+alias kgiasvcAotable='kubectl getinfo annotations svc -A -o table'
+alias kgiasvcc='kubectl getinfo annotations svc -c'
+alias kgiasvcAc='kubectl getinfo annotations svc -A -c'
+
+# Nodes
+alias kgiano='kubectl getinfo annotations nodes'
+alias kgianool='kubectl getinfo annotations nodes -l'
+alias kgianooyaml='kubectl getinfo annotations nodes -o yaml'
+alias kgianoojson='kubectl getinfo annotations nodes -o json'
+alias kgianootable='kubectl getinfo annotations nodes -o table'
+alias kgianoc='kubectl getinfo annotations nodes -c'
+
+# ConfigMaps
+alias kgiacm='kubectl getinfo annotations cm'
+alias kgiacmn='kubectl getinfo annotations cm -n'
+alias kgiacml='kubectl getinfo annotations cm -l'
+alias kgiacmA='kubectl getinfo annotations cm -A'
+alias kgiacmoyaml='kubectl getinfo annotations cm -o yaml'
+alias kgiacmojson='kubectl getinfo annotations cm -o json'
+alias kgiacmotable='kubectl getinfo annotations cm -o table'
+alias kgiacmAoyaml='kubectl getinfo annotations cm -A -o yaml'
+alias kgiacmAojson='kubectl getinfo annotations cm -A -o json'
+alias kgiacmAotable='kubectl getinfo annotations cm -A -o table'
+alias kgiacmc='kubectl getinfo annotations cm -c'
+alias kgiacmAc='kubectl getinfo annotations cm -A -c'
+
+# Secrets
+alias kgiasec='kubectl getinfo annotations secrets'
+alias kgiasecn='kubectl getinfo annotations secrets -n'
+alias kgiasecl='kubectl getinfo annotations secrets -l'
+alias kgiasecA='kubectl getinfo annotations secrets -A'
+alias kgiasecoyaml='kubectl getinfo annotations secrets -o yaml'
+alias kgiasecojson='kubectl getinfo annotations secrets -o json'
+alias kgiasecotable='kubectl getinfo annotations secrets -o table'
+alias kgiasecAoyaml='kubectl getinfo annotations secrets -A -o yaml'
+alias kgiasecAojson='kubectl getinfo annotations secrets -A -o json'
+alias kgiasecAotable='kubectl getinfo annotations secrets -A -o table'
+alias kgiasecc='kubectl getinfo annotations secrets -c'
+alias kgiasecAc='kubectl getinfo annotations secrets -A -c'
+
+# StatefulSets
+alias kgiasts='kubectl getinfo annotations sts'
+alias kgiastsn='kubectl getinfo annotations sts -n'
+alias kgiastsl='kubectl getinfo annotations sts -l'
+alias kgiastsA='kubectl getinfo annotations sts -A'
+alias kgiastsoyaml='kubectl getinfo annotations sts -o yaml'
+alias kgiastsojson='kubectl getinfo annotations sts -o json'
+alias kgiastsotable='kubectl getinfo annotations sts -o table'
+alias kgiastsAoyaml='kubectl getinfo annotations sts -A -o yaml'
+alias kgiastsAojson='kubectl getinfo annotations sts -A -o json'
+alias kgiastsAotable='kubectl getinfo annotations sts -A -o table'
+alias kgiastsc='kubectl getinfo annotations sts -c'
+alias kgiastsAc='kubectl getinfo annotations sts -A -c'
+
+# DaemonSets
+alias kgiads='kubectl getinfo annotations ds'
+alias kgiadsn='kubectl getinfo annotations ds -n'
+alias kgiadsl='kubectl getinfo annotations ds -l'
+alias kgiadsA='kubectl getinfo annotations ds -A'
+alias kgiadsoyaml='kubectl getinfo annotations ds -o yaml'
+alias kgiadsojson='kubectl getinfo annotations ds -o json'
+alias kgiadsotable='kubectl getinfo annotations ds -o table'
+alias kgiadsAoyaml='kubectl getinfo annotations ds -A -o yaml'
+alias kgiadsAojson='kubectl getinfo annotations ds -A -o json'
+alias kgiadsAotable='kubectl getinfo annotations ds -A -o table'
+alias kgiadsc='kubectl getinfo annotations ds -c'
+alias kgiadsAc='kubectl getinfo annotations ds -A -c'
+
+# ReplicaSets
+alias kgiars='kubectl getinfo annotations rs'
+alias kgiarsn='kubectl getinfo annotations rs -n'
+alias kgiarsl='kubectl getinfo annotations rs -l'
+alias kgiarsA='kubectl getinfo annotations rs -A'
+alias kgiarsoyaml='kubectl getinfo annotations rs -o yaml'
+alias kgiarsojson='kubectl getinfo annotations rs -o json'
+alias kgiarsotable='kubectl getinfo annotations rs -o table'
+alias kgiarsAoyaml='kubectl getinfo annotations rs -A -o yaml'
+alias kgiarsAojson='kubectl getinfo annotations rs -A -o json'
+alias kgiarsAotable='kubectl getinfo annotations rs -A -o table'
+alias kgiarsc='kubectl getinfo annotations rs -c'
+alias kgiarsAc='kubectl getinfo annotations rs -A -c'
+
+# CronJobs
+alias kgiacj='kubectl getinfo annotations cj'
+alias kgiacjn='kubectl getinfo annotations cj -n'
+alias kgiacjl='kubectl getinfo annotations cj -l'
+alias kgiacjA='kubectl getinfo annotations cj -A'
+alias kgiacjoyaml='kubectl getinfo annotations cj -o yaml'
+alias kgiacjojson='kubectl getinfo annotations cj -o json'
+alias kgiacjotable='kubectl getinfo annotations cj -o table'
+alias kgiacjAoyaml='kubectl getinfo annotations cj -A -o yaml'
+alias kgiacjAojson='kubectl getinfo annotations cj -A -o json'
+alias kgiacjAotable='kubectl getinfo annotations cj -A -o table'
+alias kgiacjc='kubectl getinfo annotations cj -c'
+alias kgiacjAc='kubectl getinfo annotations cj -A -c'
+
+# Jobs
+alias kgiaj='kubectl getinfo annotations jobs'
+alias kgiajn='kubectl getinfo annotations jobs -n'
+alias kgiajl='kubectl getinfo annotations jobs -l'
+alias kgiajA='kubectl getinfo annotations jobs -A'
+alias kgiajoyaml='kubectl getinfo annotations jobs -o yaml'
+alias kgiajojson='kubectl getinfo annotations jobs -o json'
+alias kgiajotable='kubectl getinfo annotations jobs -o table'
+alias kgiajAoyaml='kubectl getinfo annotations jobs -A -o yaml'
+alias kgiajAojson='kubectl getinfo annotations jobs -A -o json'
+alias kgiajAotable='kubectl getinfo annotations jobs -A -o table'
+alias kgiajc='kubectl getinfo annotations jobs -c'
+alias kgiajAc='kubectl getinfo annotations jobs -A -c'
+
+# Ingresses
+alias kgiaing='kubectl getinfo annotations ing'
+alias kgiaingin='kubectl getinfo annotations ing -n'
+alias kgiaingl='kubectl getinfo annotations ing -l'
+alias kgiaingA='kubectl getinfo annotations ing -A'
+alias kgiaingoyaml='kubectl getinfo annotations ing -o yaml'
+alias kgiaingojson='kubectl getinfo annotations ing -o json'
+alias kgiaingotable='kubectl getinfo annotations ing -o table'
+alias kgiaingAoyaml='kubectl getinfo annotations ing -A -o yaml'
+alias kgiaingAojson='kubectl getinfo annotations ing -A -o json'
+alias kgiaingAotable='kubectl getinfo annotations ing -A -o table'
+alias kgiaingc='kubectl getinfo annotations ing -c'
+alias kgiaingAc='kubectl getinfo annotations ing -A -c'
+
+# PersistentVolumes
+alias kgiapv='kubectl getinfo annotations pv'
+alias kgiapvl='kubectl getinfo annotations pv -l'
+alias kgiapvoyaml='kubectl getinfo annotations pv -o yaml'
+alias kgiapvojson='kubectl getinfo annotations pv -o json'
+alias kgiapvotable='kubectl getinfo annotations pv -o table'
+alias kgiapvc='kubectl getinfo annotations pv -c'
+
+# PersistentVolumeClaims
+alias kgiapvc='kubectl getinfo annotations pvc'
+alias kgiapvcn='kubectl getinfo annotations pvc -n'
+alias kgiapvcl='kubectl getinfo annotations pvc -l'
+alias kgiapvcA='kubectl getinfo annotations pvc -A'
+alias kgiapvcoyaml='kubectl getinfo annotations pvc -o yaml'
+alias kgiapvcojson='kubectl getinfo annotations pvc -o json'
+alias kgiapvcotable='kubectl getinfo annotations pvc -o table'
+alias kgiapvcAoyaml='kubectl getinfo annotations pvc -A -o yaml'
+alias kgiapvcAojson='kubectl getinfo annotations pvc -A -o json'
+alias kgiapvcAotable='kubectl getinfo annotations pvc -A -o table'
+alias kgiapvcc='kubectl getinfo annotations pvc -c'
+alias kgiapvcAc='kubectl getinfo annotations pvc -A -c'
+
+# =============================================================================
+# OWNER (kgio)
+# =============================================================================
+
+# Pods
+alias kgiop='kubectl getinfo owner pods'
+alias kgiopn='kubectl getinfo owner pods -n'
+alias kgiopl='kubectl getinfo owner pods -l'
+alias kgiopA='kubectl getinfo owner pods -A'
+alias kgiopoyaml='kubectl getinfo owner pods -o yaml'
+alias kgiopojson='kubectl getinfo owner pods -o json'
+alias kgiopotable='kubectl getinfo owner pods -o table'
+alias kgiopAoyaml='kubectl getinfo owner pods -A -o yaml'
+alias kgiopAojson='kubectl getinfo owner pods -A -o json'
+alias kgiopAotable='kubectl getinfo owner pods -A -o table'
+alias kgiopc='kubectl getinfo owner pods -c'
+alias kgiopAc='kubectl getinfo owner pods -A -c'
+
+# Deployments
+alias kgiod='kubectl getinfo owner deploy'
+alias kgiodn='kubectl getinfo owner deploy -n'
+alias kgiodl='kubectl getinfo owner deploy -l'
+alias kgiodA='kubectl getinfo owner deploy -A'
+alias kgiodoyaml='kubectl getinfo owner deploy -o yaml'
+alias kgiodojson='kubectl getinfo owner deploy -o json'
+alias kgiodotable='kubectl getinfo owner deploy -o table'
+alias kgiodAoyaml='kubectl getinfo owner deploy -A -o yaml'
+alias kgiodAojson='kubectl getinfo owner deploy -A -o json'
+alias kgiodAotable='kubectl getinfo owner deploy -A -o table'
+alias kgiodc='kubectl getinfo owner deploy -c'
+alias kgiodAc='kubectl getinfo owner deploy -A -c'
+
+# Services
+alias kgiosvc='kubectl getinfo owner svc'
+alias kgiosvcn='kubectl getinfo owner svc -n'
+alias kgiosvcl='kubectl getinfo owner svc -l'
+alias kgiosvcA='kubectl getinfo owner svc -A'
+alias kgiosvcoyaml='kubectl getinfo owner svc -o yaml'
+alias kgiosvcojson='kubectl getinfo owner svc -o json'
+alias kgiosvcotable='kubectl getinfo owner svc -o table'
+alias kgiosvcAoyaml='kubectl getinfo owner svc -A -o yaml'
+alias kgiosvcAojson='kubectl getinfo owner svc -A -o json'
+alias kgiosvcAotable='kubectl getinfo owner svc -A -o table'
+alias kgiosvcc='kubectl getinfo owner svc -c'
+alias kgiosvcAc='kubectl getinfo owner svc -A -c'
+
+# ReplicaSets
+alias kgiors='kubectl getinfo owner rs'
+alias kgiorsn='kubectl getinfo owner rs -n'
+alias kgiorsl='kubectl getinfo owner rs -l'
+alias kgiorsA='kubectl getinfo owner rs -A'
+alias kgiorsoyaml='kubectl getinfo owner rs -o yaml'
+alias kgiorsojson='kubectl getinfo owner rs -o json'
+alias kgiorsotable='kubectl getinfo owner rs -o table'
+alias kgiorsAoyaml='kubectl getinfo owner rs -A -o yaml'
+alias kgiorsAojson='kubectl getinfo owner rs -A -o json'
+alias kgiorsAotable='kubectl getinfo owner rs -A -o table'
+alias kgiorsc='kubectl getinfo owner rs -c'
+alias kgiorsAc='kubectl getinfo owner rs -A -c'
+
+# StatefulSets
+alias kgiosts='kubectl getinfo owner sts'
+alias kgiostsn='kubectl getinfo owner sts -n'
+alias kgiostsl='kubectl getinfo owner sts -l'
+alias kgiostsA='kubectl getinfo owner sts -A'
+alias kgiostsoyaml='kubectl getinfo owner sts -o yaml'
+alias kgiostsojson='kubectl getinfo owner sts -o json'
+alias kgiostsotable='kubectl getinfo owner sts -o table'
+alias kgiostsAoyaml='kubectl getinfo owner sts -A -o yaml'
+alias kgiostsAojson='kubectl getinfo owner sts -A -o json'
+alias kgiostsAotable='kubectl getinfo owner sts -A -o table'
+alias kgiostsc='kubectl getinfo owner sts -c'
+alias kgiostsAc='kubectl getinfo owner sts -A -c'
+
+# DaemonSets
+alias kgiods='kubectl getinfo owner ds'
+alias kgiodsn='kubectl getinfo owner ds -n'
+alias kgiodsl='kubectl getinfo owner ds -l'
+alias kgiodsA='kubectl getinfo owner ds -A'
+alias kgiodsoyaml='kubectl getinfo owner ds -o yaml'
+alias kgiodsojson='kubectl getinfo owner ds -o json'
+alias kgiodsotable='kubectl getinfo owner ds -o table'
+alias kgiodsAoyaml='kubectl getinfo owner ds -A -o yaml'
+alias kgiodsAojson='kubectl getinfo owner ds -A -o json'
+alias kgiodsAotable='kubectl getinfo owner ds -A -o table'
+alias kgiodsc='kubectl getinfo owner ds -c'
+alias kgiodsAc='kubectl getinfo owner ds -A -c'
+
+# Jobs
+alias kgioj='kubectl getinfo owner jobs'
+alias kgiojn='kubectl getinfo owner jobs -n'
+alias kgiojl='kubectl getinfo owner jobs -l'
+alias kgiojA='kubectl getinfo owner jobs -A'
+alias kgiojoyaml='kubectl getinfo owner jobs -o yaml'
+alias kgiojojson='kubectl getinfo owner jobs -o json'
+alias kgiojotable='kubectl getinfo owner jobs -o table'
+alias kgiojAoyaml='kubectl getinfo owner jobs -A -o yaml'
+alias kgiojAojson='kubectl getinfo owner jobs -A -o json'
+alias kgiojAotable='kubectl getinfo owner jobs -A -o table'
+alias kgiojc='kubectl getinfo owner jobs -c'
+alias kgiojAc='kubectl getinfo owner jobs -A -c'
+
+# =============================================================================
+# SCHEDULING (kgis) - All scheduling info
+# =============================================================================
+
+# Pods
+alias kgisp='kubectl getinfo scheduling pods'
+alias kgispn='kubectl getinfo scheduling pods -n'
+alias kgispl='kubectl getinfo scheduling pods -l'
+alias kgispA='kubectl getinfo scheduling pods -A'
+alias kgispoyaml='kubectl getinfo scheduling pods -o yaml'
+alias kgispojson='kubectl getinfo scheduling pods -o json'
+alias kgispotable='kubectl getinfo scheduling pods -o table'
+alias kgispAoyaml='kubectl getinfo scheduling pods -A -o yaml'
+alias kgispAojson='kubectl getinfo scheduling pods -A -o json'
+alias kgispAotable='kubectl getinfo scheduling pods -A -o table'
+alias kgispc='kubectl getinfo scheduling pods -c'
+alias kgispAc='kubectl getinfo scheduling pods -A -c'
+
+# Deployments
+alias kgisd='kubectl getinfo scheduling deploy'
+alias kgisdn='kubectl getinfo scheduling deploy -n'
+alias kgisdl='kubectl getinfo scheduling deploy -l'
+alias kgisdA='kubectl getinfo scheduling deploy -A'
+alias kgisdoyaml='kubectl getinfo scheduling deploy -o yaml'
+alias kgisdojson='kubectl getinfo scheduling deploy -o json'
+alias kgisdotable='kubectl getinfo scheduling deploy -o table'
+alias kgisdAoyaml='kubectl getinfo scheduling deploy -A -o yaml'
+alias kgisdAojson='kubectl getinfo scheduling deploy -A -o json'
+alias kgisdAotable='kubectl getinfo scheduling deploy -A -o table'
+alias kgisdc='kubectl getinfo scheduling deploy -c'
+alias kgisdAc='kubectl getinfo scheduling deploy -A -c'
+
+# StatefulSets
+alias kgissts='kubectl getinfo scheduling sts'
+alias kgisstsn='kubectl getinfo scheduling sts -n'
+alias kgisstsl='kubectl getinfo scheduling sts -l'
+alias kgisstsA='kubectl getinfo scheduling sts -A'
+alias kgisstsoyaml='kubectl getinfo scheduling sts -o yaml'
+alias kgisstsojson='kubectl getinfo scheduling sts -o json'
+alias kgisstsotable='kubectl getinfo scheduling sts -o table'
+alias kgisstsAoyaml='kubectl getinfo scheduling sts -A -o yaml'
+alias kgisstsAojson='kubectl getinfo scheduling sts -A -o json'
+alias kgisstsAotable='kubectl getinfo scheduling sts -A -o table'
+alias kgisstsc='kubectl getinfo scheduling sts -c'
+alias kgisstsAc='kubectl getinfo scheduling sts -A -c'
+
+# DaemonSets
+alias kgisds='kubectl getinfo scheduling ds'
+alias kgisdsn='kubectl getinfo scheduling ds -n'
+alias kgisdsl='kubectl getinfo scheduling ds -l'
+alias kgisdsA='kubectl getinfo scheduling ds -A'
+alias kgisdsoyaml='kubectl getinfo scheduling ds -o yaml'
+alias kgisdsojson='kubectl getinfo scheduling ds -o json'
+alias kgisdsotable='kubectl getinfo scheduling ds -o table'
+alias kgisdsAoyaml='kubectl getinfo scheduling ds -A -o yaml'
+alias kgisdsAojson='kubectl getinfo scheduling ds -A -o json'
+alias kgisdsAotable='kubectl getinfo scheduling ds -A -o table'
+alias kgisdsc='kubectl getinfo scheduling ds -c'
+alias kgisdsAc='kubectl getinfo scheduling ds -A -c'
+
+# Jobs
+alias kgisj='kubectl getinfo scheduling jobs'
+alias kgisjn='kubectl getinfo scheduling jobs -n'
+alias kgisjl='kubectl getinfo scheduling jobs -l'
+alias kgisjA='kubectl getinfo scheduling jobs -A'
+alias kgisjoyaml='kubectl getinfo scheduling jobs -o yaml'
+alias kgisjojson='kubectl getinfo scheduling jobs -o json'
+alias kgisjotable='kubectl getinfo scheduling jobs -o table'
+alias kgisjAoyaml='kubectl getinfo scheduling jobs -A -o yaml'
+alias kgisjAojson='kubectl getinfo scheduling jobs -A -o json'
+alias kgisjAotable='kubectl getinfo scheduling jobs -A -o table'
+alias kgisjc='kubectl getinfo scheduling jobs -c'
+alias kgisjAc='kubectl getinfo scheduling jobs -A -c'
+
+# CronJobs
+alias kgiscj='kubectl getinfo scheduling cj'
+alias kgiscjn='kubectl getinfo scheduling cj -n'
+alias kgiscjl='kubectl getinfo scheduling cj -l'
+alias kgiscjA='kubectl getinfo scheduling cj -A'
+alias kgiscjoyaml='kubectl getinfo scheduling cj -o yaml'
+alias kgiscjojson='kubectl getinfo scheduling cj -o json'
+alias kgiscjotable='kubectl getinfo scheduling cj -o table'
+alias kgiscjAoyaml='kubectl getinfo scheduling cj -A -o yaml'
+alias kgiscjAojson='kubectl getinfo scheduling cj -A -o json'
+alias kgiscjAotable='kubectl getinfo scheduling cj -A -o table'
+alias kgiscjc='kubectl getinfo scheduling cj -c'
+alias kgiscjAc='kubectl getinfo scheduling cj -A -c'
+
+# =============================================================================
+# SCHEDULING TOLERATIONS (kgist)
+# =============================================================================
+
+# Pods
+alias kgistp='kubectl getinfo scheduling tolerations pods'
+alias kgistpn='kubectl getinfo scheduling tolerations pods -n'
+alias kgistpl='kubectl getinfo scheduling tolerations pods -l'
+alias kgistpA='kubectl getinfo scheduling tolerations pods -A'
+alias kgistpoyaml='kubectl getinfo scheduling tolerations pods -o yaml'
+alias kgistpojson='kubectl getinfo scheduling tolerations pods -o json'
+alias kgistpotable='kubectl getinfo scheduling tolerations pods -o table'
+alias kgistpAoyaml='kubectl getinfo scheduling tolerations pods -A -o yaml'
+alias kgistpAojson='kubectl getinfo scheduling tolerations pods -A -o json'
+alias kgistpAotable='kubectl getinfo scheduling tolerations pods -A -o table'
+alias kgistpc='kubectl getinfo scheduling tolerations pods -c'
+alias kgistpAc='kubectl getinfo scheduling tolerations pods -A -c'
+
+# Deployments
+alias kgistd='kubectl getinfo scheduling tolerations deploy'
+alias kgistdn='kubectl getinfo scheduling tolerations deploy -n'
+alias kgistdl='kubectl getinfo scheduling tolerations deploy -l'
+alias kgistdA='kubectl getinfo scheduling tolerations deploy -A'
+alias kgistdoyaml='kubectl getinfo scheduling tolerations deploy -o yaml'
+alias kgistdojson='kubectl getinfo scheduling tolerations deploy -o json'
+alias kgistdotable='kubectl getinfo scheduling tolerations deploy -o table'
+alias kgistdAoyaml='kubectl getinfo scheduling tolerations deploy -A -o yaml'
+alias kgistdAojson='kubectl getinfo scheduling tolerations deploy -A -o json'
+alias kgistdAotable='kubectl getinfo scheduling tolerations deploy -A -o table'
+alias kgistdc='kubectl getinfo scheduling tolerations deploy -c'
+alias kgistdAc='kubectl getinfo scheduling tolerations deploy -A -c'
+
+# StatefulSets
+alias kgiststs='kubectl getinfo scheduling tolerations sts'
+alias kgiststsn='kubectl getinfo scheduling tolerations sts -n'
+alias kgiststsl='kubectl getinfo scheduling tolerations sts -l'
+alias kgiststsA='kubectl getinfo scheduling tolerations sts -A'
+alias kgiststsoyaml='kubectl getinfo scheduling tolerations sts -o yaml'
+alias kgiststsojson='kubectl getinfo scheduling tolerations sts -o json'
+alias kgiststsotable='kubectl getinfo scheduling tolerations sts -o table'
+alias kgiststsAoyaml='kubectl getinfo scheduling tolerations sts -A -o yaml'
+alias kgiststsAojson='kubectl getinfo scheduling tolerations sts -A -o json'
+alias kgiststsAotable='kubectl getinfo scheduling tolerations sts -A -o table'
+alias kgiststsc='kubectl getinfo scheduling tolerations sts -c'
+alias kgiststsAc='kubectl getinfo scheduling tolerations sts -A -c'
+
+# DaemonSets
+alias kgistds='kubectl getinfo scheduling tolerations ds'
+alias kgistdsn='kubectl getinfo scheduling tolerations ds -n'
+alias kgistdsl='kubectl getinfo scheduling tolerations ds -l'
+alias kgistdsA='kubectl getinfo scheduling tolerations ds -A'
+alias kgistdsoyaml='kubectl getinfo scheduling tolerations ds -o yaml'
+alias kgistdsojson='kubectl getinfo scheduling tolerations ds -o json'
+alias kgistdsotable='kubectl getinfo scheduling tolerations ds -o table'
+alias kgistdsAoyaml='kubectl getinfo scheduling tolerations ds -A -o yaml'
+alias kgistdsAojson='kubectl getinfo scheduling tolerations ds -A -o json'
+alias kgistdsAotable='kubectl getinfo scheduling tolerations ds -A -o table'
+alias kgistdsc='kubectl getinfo scheduling tolerations ds -c'
+alias kgistdsAc='kubectl getinfo scheduling tolerations ds -A -c'
+
+# =============================================================================
+# SCHEDULING AFFINITY (kgisaf)
+# =============================================================================
+
+# Pods
+alias kgisafp='kubectl getinfo scheduling affinity pods'
+alias kgisafpn='kubectl getinfo scheduling affinity pods -n'
+alias kgisafpl='kubectl getinfo scheduling affinity pods -l'
+alias kgisafpA='kubectl getinfo scheduling affinity pods -A'
+alias kgisafpoyaml='kubectl getinfo scheduling affinity pods -o yaml'
+alias kgisafpojson='kubectl getinfo scheduling affinity pods -o json'
+alias kgisafpotable='kubectl getinfo scheduling affinity pods -o table'
+alias kgisafpAoyaml='kubectl getinfo scheduling affinity pods -A -o yaml'
+alias kgisafpAojson='kubectl getinfo scheduling affinity pods -A -o json'
+alias kgisafpAotable='kubectl getinfo scheduling affinity pods -A -o table'
+alias kgisafpc='kubectl getinfo scheduling affinity pods -c'
+alias kgisafpAc='kubectl getinfo scheduling affinity pods -A -c'
+
+# Deployments
+alias kgisafd='kubectl getinfo scheduling affinity deploy'
+alias kgisafdn='kubectl getinfo scheduling affinity deploy -n'
+alias kgisafdl='kubectl getinfo scheduling affinity deploy -l'
+alias kgisafdA='kubectl getinfo scheduling affinity deploy -A'
+alias kgisafdoyaml='kubectl getinfo scheduling affinity deploy -o yaml'
+alias kgisafdojson='kubectl getinfo scheduling affinity deploy -o json'
+alias kgisafdotable='kubectl getinfo scheduling affinity deploy -o table'
+alias kgisafdAoyaml='kubectl getinfo scheduling affinity deploy -A -o yaml'
+alias kgisafdAojson='kubectl getinfo scheduling affinity deploy -A -o json'
+alias kgisafdAotable='kubectl getinfo scheduling affinity deploy -A -o table'
+alias kgisafdc='kubectl getinfo scheduling affinity deploy -c'
+alias kgisafdAc='kubectl getinfo scheduling affinity deploy -A -c'
+
+# StatefulSets
+alias kgisafsts='kubectl getinfo scheduling affinity sts'
+alias kgisafstsn='kubectl getinfo scheduling affinity sts -n'
+alias kgisafstsl='kubectl getinfo scheduling affinity sts -l'
+alias kgisafstsA='kubectl getinfo scheduling affinity sts -A'
+alias kgisafstsoyaml='kubectl getinfo scheduling affinity sts -o yaml'
+alias kgisafstsojson='kubectl getinfo scheduling affinity sts -o json'
+alias kgisafstsotable='kubectl getinfo scheduling affinity sts -o table'
+alias kgisafstsAoyaml='kubectl getinfo scheduling affinity sts -A -o yaml'
+alias kgisafstsAojson='kubectl getinfo scheduling affinity sts -A -o json'
+alias kgisafstsAotable='kubectl getinfo scheduling affinity sts -A -o table'
+alias kgisafstsc='kubectl getinfo scheduling affinity sts -c'
+alias kgisafstsAc='kubectl getinfo scheduling affinity sts -A -c'
+
+# DaemonSets
+alias kgisafds='kubectl getinfo scheduling affinity ds'
+alias kgisafdsn='kubectl getinfo scheduling affinity ds -n'
+alias kgisafdsl='kubectl getinfo scheduling affinity ds -l'
+alias kgisafdsA='kubectl getinfo scheduling affinity ds -A'
+alias kgisafdsoyaml='kubectl getinfo scheduling affinity ds -o yaml'
+alias kgisafdsojson='kubectl getinfo scheduling affinity ds -o json'
+alias kgisafdsotable='kubectl getinfo scheduling affinity ds -o table'
+alias kgisafdsAoyaml='kubectl getinfo scheduling affinity ds -A -o yaml'
+alias kgisafdsAojson='kubectl getinfo scheduling affinity ds -A -o json'
+alias kgisafdsAotable='kubectl getinfo scheduling affinity ds -A -o table'
+alias kgisafdsc='kubectl getinfo scheduling affinity ds -c'
+alias kgisafdsAc='kubectl getinfo scheduling affinity ds -A -c'
+
+# =============================================================================
+# SCHEDULING NODESELECTOR (kgisns)
+# =============================================================================
+
+# Pods
+alias kgisnsp='kubectl getinfo scheduling nodeselector pods'
+alias kgisnspn='kubectl getinfo scheduling nodeselector pods -n'
+alias kgisnspl='kubectl getinfo scheduling nodeselector pods -l'
+alias kgisnspA='kubectl getinfo scheduling nodeselector pods -A'
+alias kgisnspoyaml='kubectl getinfo scheduling nodeselector pods -o yaml'
+alias kgisnspojson='kubectl getinfo scheduling nodeselector pods -o json'
+alias kgisnspotable='kubectl getinfo scheduling nodeselector pods -o table'
+alias kgisnspAoyaml='kubectl getinfo scheduling nodeselector pods -A -o yaml'
+alias kgisnspAojson='kubectl getinfo scheduling nodeselector pods -A -o json'
+alias kgisnspAotable='kubectl getinfo scheduling nodeselector pods -A -o table'
+alias kgisnspc='kubectl getinfo scheduling nodeselector pods -c'
+alias kgisnspAc='kubectl getinfo scheduling nodeselector pods -A -c'
+
+# Deployments
+alias kgisnsd='kubectl getinfo scheduling nodeselector deploy'
+alias kgisnsdn='kubectl getinfo scheduling nodeselector deploy -n'
+alias kgisnsdl='kubectl getinfo scheduling nodeselector deploy -l'
+alias kgisnsdA='kubectl getinfo scheduling nodeselector deploy -A'
+alias kgisnsdoyaml='kubectl getinfo scheduling nodeselector deploy -o yaml'
+alias kgisnsdojson='kubectl getinfo scheduling nodeselector deploy -o json'
+alias kgisnsdotable='kubectl getinfo scheduling nodeselector deploy -o table'
+alias kgisnsdAoyaml='kubectl getinfo scheduling nodeselector deploy -A -o yaml'
+alias kgisnsdAojson='kubectl getinfo scheduling nodeselector deploy -A -o json'
+alias kgisnsdAotable='kubectl getinfo scheduling nodeselector deploy -A -o table'
+alias kgisnsdc='kubectl getinfo scheduling nodeselector deploy -c'
+alias kgisnsdAc='kubectl getinfo scheduling nodeselector deploy -A -c'
+
+# StatefulSets
+alias kgisnssts='kubectl getinfo scheduling nodeselector sts'
+alias kgisnsstsn='kubectl getinfo scheduling nodeselector sts -n'
+alias kgisnsstsl='kubectl getinfo scheduling nodeselector sts -l'
+alias kgisnsstsA='kubectl getinfo scheduling nodeselector sts -A'
+alias kgisnsstsoyaml='kubectl getinfo scheduling nodeselector sts -o yaml'
+alias kgisnsstsojson='kubectl getinfo scheduling nodeselector sts -o json'
+alias kgisnsstsotable='kubectl getinfo scheduling nodeselector sts -o table'
+alias kgisnsstsAoyaml='kubectl getinfo scheduling nodeselector sts -A -o yaml'
+alias kgisnsstsAojson='kubectl getinfo scheduling nodeselector sts -A -o json'
+alias kgisnsstsAotable='kubectl getinfo scheduling nodeselector sts -A -o table'
+alias kgisnsstsc='kubectl getinfo scheduling nodeselector sts -c'
+alias kgisnsstsAc='kubectl getinfo scheduling nodeselector sts -A -c'
+
+# DaemonSets
+alias kgisnsds='kubectl getinfo scheduling nodeselector ds'
+alias kgisnsdsn='kubectl getinfo scheduling nodeselector ds -n'
+alias kgisnsdsl='kubectl getinfo scheduling nodeselector ds -l'
+alias kgisnsdsA='kubectl getinfo scheduling nodeselector ds -A'
+alias kgisnsdsoyaml='kubectl getinfo scheduling nodeselector ds -o yaml'
+alias kgisnsdsojson='kubectl getinfo scheduling nodeselector ds -o json'
+alias kgisnsdsotable='kubectl getinfo scheduling nodeselector ds -o table'
+alias kgisnsdsAoyaml='kubectl getinfo scheduling nodeselector ds -A -o yaml'
+alias kgisnsdsAojson='kubectl getinfo scheduling nodeselector ds -A -o json'
+alias kgisnsdsAotable='kubectl getinfo scheduling nodeselector ds -A -o table'
+alias kgisnsdsc='kubectl getinfo scheduling nodeselector ds -c'
+alias kgisnsdsAc='kubectl getinfo scheduling nodeselector ds -A -c'
+
+# =============================================================================
+# SCHEDULING RESOURCES (kgisr)
+# =============================================================================
+
+# Pods
+alias kgisrp='kubectl getinfo scheduling resources pods'
+alias kgisrpn='kubectl getinfo scheduling resources pods -n'
+alias kgisrpl='kubectl getinfo scheduling resources pods -l'
+alias kgisrpA='kubectl getinfo scheduling resources pods -A'
+alias kgisrpoyaml='kubectl getinfo scheduling resources pods -o yaml'
+alias kgisrpojson='kubectl getinfo scheduling resources pods -o json'
+alias kgisrpotable='kubectl getinfo scheduling resources pods -o table'
+alias kgisrpAoyaml='kubectl getinfo scheduling resources pods -A -o yaml'
+alias kgisrpAojson='kubectl getinfo scheduling resources pods -A -o json'
+alias kgisrpAotable='kubectl getinfo scheduling resources pods -A -o table'
+alias kgisrpc='kubectl getinfo scheduling resources pods -c'
+alias kgisrpAc='kubectl getinfo scheduling resources pods -A -c'
+
+# Deployments
+alias kgisrd='kubectl getinfo scheduling resources deploy'
+alias kgisrdn='kubectl getinfo scheduling resources deploy -n'
+alias kgisrdl='kubectl getinfo scheduling resources deploy -l'
+alias kgisrdA='kubectl getinfo scheduling resources deploy -A'
+alias kgisrdoyaml='kubectl getinfo scheduling resources deploy -o yaml'
+alias kgisrdojson='kubectl getinfo scheduling resources deploy -o json'
+alias kgisrdotable='kubectl getinfo scheduling resources deploy -o table'
+alias kgisrdAoyaml='kubectl getinfo scheduling resources deploy -A -o yaml'
+alias kgisrdAojson='kubectl getinfo scheduling resources deploy -A -o json'
+alias kgisrdAotable='kubectl getinfo scheduling resources deploy -A -o table'
+alias kgisrdc='kubectl getinfo scheduling resources deploy -c'
+alias kgisrdAc='kubectl getinfo scheduling resources deploy -A -c'
+
+# StatefulSets
+alias kgisrsts='kubectl getinfo scheduling resources sts'
+alias kgisrstsn='kubectl getinfo scheduling resources sts -n'
+alias kgisrstsl='kubectl getinfo scheduling resources sts -l'
+alias kgisrstsA='kubectl getinfo scheduling resources sts -A'
+alias kgisrstsoyaml='kubectl getinfo scheduling resources sts -o yaml'
+alias kgisrstsojson='kubectl getinfo scheduling resources sts -o json'
+alias kgisrstsotable='kubectl getinfo scheduling resources sts -o table'
+alias kgisrstsAoyaml='kubectl getinfo scheduling resources sts -A -o yaml'
+alias kgisrstsAojson='kubectl getinfo scheduling resources sts -A -o json'
+alias kgisrstsAotable='kubectl getinfo scheduling resources sts -A -o table'
+alias kgisrstsc='kubectl getinfo scheduling resources sts -c'
+alias kgisrstsAc='kubectl getinfo scheduling resources sts -A -c'
+
+# DaemonSets
+alias kgisrds='kubectl getinfo scheduling resources ds'
+alias kgisrdsn='kubectl getinfo scheduling resources ds -n'
+alias kgisrdsl='kubectl getinfo scheduling resources ds -l'
+alias kgisrdsA='kubectl getinfo scheduling resources ds -A'
+alias kgisrdsoyaml='kubectl getinfo scheduling resources ds -o yaml'
+alias kgisrdsojson='kubectl getinfo scheduling resources ds -o json'
+alias kgisrdsotable='kubectl getinfo scheduling resources ds -o table'
+alias kgisrdsAoyaml='kubectl getinfo scheduling resources ds -A -o yaml'
+alias kgisrdsAojson='kubectl getinfo scheduling resources ds -A -o json'
+alias kgisrdsAotable='kubectl getinfo scheduling resources ds -A -o table'
+alias kgisrdsc='kubectl getinfo scheduling resources ds -c'
+alias kgisrdsAc='kubectl getinfo scheduling resources ds -A -c'
+
+# =============================================================================
+# SCHEDULING TOPOLOGY (kgistp) - Note: tp for topology
+# =============================================================================
+
+# Pods
+alias kgistpp='kubectl getinfo scheduling topology pods'
+alias kgistppn='kubectl getinfo scheduling topology pods -n'
+alias kgistppl='kubectl getinfo scheduling topology pods -l'
+alias kgistppA='kubectl getinfo scheduling topology pods -A'
+alias kgistppoyaml='kubectl getinfo scheduling topology pods -o yaml'
+alias kgistppojson='kubectl getinfo scheduling topology pods -o json'
+alias kgistppotable='kubectl getinfo scheduling topology pods -o table'
+alias kgistppAoyaml='kubectl getinfo scheduling topology pods -A -o yaml'
+alias kgistppAojson='kubectl getinfo scheduling topology pods -A -o json'
+alias kgistppAotable='kubectl getinfo scheduling topology pods -A -o table'
+alias kgistppc='kubectl getinfo scheduling topology pods -c'
+alias kgistppAc='kubectl getinfo scheduling topology pods -A -c'
+
+# Deployments
+alias kgistpd='kubectl getinfo scheduling topology deploy'
+alias kgistpdn='kubectl getinfo scheduling topology deploy -n'
+alias kgistpdl='kubectl getinfo scheduling topology deploy -l'
+alias kgistpdA='kubectl getinfo scheduling topology deploy -A'
+alias kgistpdoyaml='kubectl getinfo scheduling topology deploy -o yaml'
+alias kgistpdojson='kubectl getinfo scheduling topology deploy -o json'
+alias kgistpdotable='kubectl getinfo scheduling topology deploy -o table'
+alias kgistpdAoyaml='kubectl getinfo scheduling topology deploy -A -o yaml'
+alias kgistpdAojson='kubectl getinfo scheduling topology deploy -A -o json'
+alias kgistpdAotable='kubectl getinfo scheduling topology deploy -A -o table'
+alias kgistpdc='kubectl getinfo scheduling topology deploy -c'
+alias kgistpdAc='kubectl getinfo scheduling topology deploy -A -c'
+
+# =============================================================================
+# SCHEDULING PRIORITY (kgispr)
+# =============================================================================
+
+# Pods
+alias kgisprp='kubectl getinfo scheduling priority pods'
+alias kgisprpn='kubectl getinfo scheduling priority pods -n'
+alias kgisprpl='kubectl getinfo scheduling priority pods -l'
+alias kgisprpA='kubectl getinfo scheduling priority pods -A'
+alias kgisprpoyaml='kubectl getinfo scheduling priority pods -o yaml'
+alias kgisprpojson='kubectl getinfo scheduling priority pods -o json'
+alias kgisprpotable='kubectl getinfo scheduling priority pods -o table'
+alias kgisprpAoyaml='kubectl getinfo scheduling priority pods -A -o yaml'
+alias kgisprpAojson='kubectl getinfo scheduling priority pods -A -o json'
+alias kgisprpAotable='kubectl getinfo scheduling priority pods -A -o table'
+alias kgisprpc='kubectl getinfo scheduling priority pods -c'
+alias kgisprpAc='kubectl getinfo scheduling priority pods -A -c'
+
+# Deployments
+alias kgisprd='kubectl getinfo scheduling priority deploy'
+alias kgisprdn='kubectl getinfo scheduling priority deploy -n'
+alias kgisprdl='kubectl getinfo scheduling priority deploy -l'
+alias kgisprdA='kubectl getinfo scheduling priority deploy -A'
+alias kgisprdoyaml='kubectl getinfo scheduling priority deploy -o yaml'
+alias kgisprdojson='kubectl getinfo scheduling priority deploy -o json'
+alias kgisprdotable='kubectl getinfo scheduling priority deploy -o table'
+alias kgisprdAoyaml='kubectl getinfo scheduling priority deploy -A -o yaml'
+alias kgisprdAojson='kubectl getinfo scheduling priority deploy -A -o json'
+alias kgisprdAotable='kubectl getinfo scheduling priority deploy -A -o table'
+alias kgisprdc='kubectl getinfo scheduling priority deploy -c'
+alias kgisprdAc='kubectl getinfo scheduling priority deploy -A -c'
+
+# =============================================================================
+# SCHEDULING RUNTIME (kgisrt)
+# =============================================================================
+
+# Pods
+alias kgisrtp='kubectl getinfo scheduling runtime pods'
+alias kgisrtpn='kubectl getinfo scheduling runtime pods -n'
+alias kgisrtpl='kubectl getinfo scheduling runtime pods -l'
+alias kgisrtpA='kubectl getinfo scheduling runtime pods -A'
+alias kgisrtpoyaml='kubectl getinfo scheduling runtime pods -o yaml'
+alias kgisrtpojson='kubectl getinfo scheduling runtime pods -o json'
+alias kgisrtpotable='kubectl getinfo scheduling runtime pods -o table'
+alias kgisrtpAoyaml='kubectl getinfo scheduling runtime pods -A -o yaml'
+alias kgisrtpAojson='kubectl getinfo scheduling runtime pods -A -o json'
+alias kgisrtpAotable='kubectl getinfo scheduling runtime pods -A -o table'
+alias kgisrtpc='kubectl getinfo scheduling runtime pods -c'
+alias kgisrtpAc='kubectl getinfo scheduling runtime pods -A -c'
+
+# Deployments
+alias kgisrtd='kubectl getinfo scheduling runtime deploy'
+alias kgisrtdn='kubectl getinfo scheduling runtime deploy -n'
+alias kgisrtdl='kubectl getinfo scheduling runtime deploy -l'
+alias kgisrtdA='kubectl getinfo scheduling runtime deploy -A'
+alias kgisrtdoyaml='kubectl getinfo scheduling runtime deploy -o yaml'
+alias kgisrtdojson='kubectl getinfo scheduling runtime deploy -o json'
+alias kgisrtdotable='kubectl getinfo scheduling runtime deploy -o table'
+alias kgisrtdAoyaml='kubectl getinfo scheduling runtime deploy -A -o yaml'
+alias kgisrtdAojson='kubectl getinfo scheduling runtime deploy -A -o json'
+alias kgisrtdAotable='kubectl getinfo scheduling runtime deploy -A -o table'
+alias kgisrtdc='kubectl getinfo scheduling runtime deploy -c'
+alias kgisrtdAc='kubectl getinfo scheduling runtime deploy -A -c'
+
+# =============================================================================
+# Print full command before running (optional function)
+# Add this to see what command is being executed:
+#
+# function kubectl() { echo "+ kubectl $@" >&2; command kubectl "$@"; }
+# =============================================================================
+
