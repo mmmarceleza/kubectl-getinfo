@@ -4,19 +4,57 @@ A `kubectl` plugin to list labels and annotations from Kubernetes objects in mul
 
 ## Installation
 
-1. Build the plugin:
-```bash
-go build -o kubectl-getinfo
-```
+### From GitHub Releases (Recommended)
 
-2. Put the binary on your PATH:
+Download the latest binary for your platform from the [Releases page](https://github.com/mmmarceleza/kubectl-getinfo/releases/latest).
+
+**Linux (amd64):**
 ```bash
+curl -LO https://github.com/mmmarceleza/kubectl-getinfo/releases/latest/download/kubectl-getinfo_$(curl -s https://api.github.com/repos/mmmarceleza/kubectl-getinfo/releases/latest | grep tag_name | cut -d '"' -f 4)_linux_amd64.tar.gz
+tar -xzf kubectl-getinfo_*.tar.gz
 sudo mv kubectl-getinfo /usr/local/bin/
 ```
 
-Or add it to your local PATH:
+**Linux (arm64):**
 ```bash
-export PATH=$PATH:$(pwd)
+curl -LO https://github.com/mmmarceleza/kubectl-getinfo/releases/latest/download/kubectl-getinfo_$(curl -s https://api.github.com/repos/mmmarceleza/kubectl-getinfo/releases/latest | grep tag_name | cut -d '"' -f 4)_linux_arm64.tar.gz
+tar -xzf kubectl-getinfo_*.tar.gz
+sudo mv kubectl-getinfo /usr/local/bin/
+```
+
+**macOS (amd64):**
+```bash
+curl -LO https://github.com/mmmarceleza/kubectl-getinfo/releases/latest/download/kubectl-getinfo_$(curl -s https://api.github.com/repos/mmmarceleza/kubectl-getinfo/releases/latest | grep tag_name | cut -d '"' -f 4)_darwin_amd64.tar.gz
+tar -xzf kubectl-getinfo_*.tar.gz
+sudo mv kubectl-getinfo /usr/local/bin/
+```
+
+**macOS (arm64 / Apple Silicon):**
+```bash
+curl -LO https://github.com/mmmarceleza/kubectl-getinfo/releases/latest/download/kubectl-getinfo_$(curl -s https://api.github.com/repos/mmmarceleza/kubectl-getinfo/releases/latest | grep tag_name | cut -d '"' -f 4)_darwin_arm64.tar.gz
+tar -xzf kubectl-getinfo_*.tar.gz
+sudo mv kubectl-getinfo /usr/local/bin/
+```
+
+**Windows:**
+
+Download the `.zip` file from the [Releases page](https://github.com/mmmarceleza/kubectl-getinfo/releases/latest), extract it, and add `kubectl-getinfo.exe` to your PATH.
+
+### Build from Source
+
+If you prefer to build from source:
+
+```bash
+git clone https://github.com/mmmarceleza/kubectl-getinfo.git
+cd kubectl-getinfo
+go build -o kubectl-getinfo
+sudo mv kubectl-getinfo /usr/local/bin/
+```
+
+### Verify Installation
+
+```bash
+kubectl getinfo --help
 ```
 
 ## Shell Aliases (Optional)
