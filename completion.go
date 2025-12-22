@@ -157,17 +157,18 @@ func generateZshCompletion() {
 # zsh completion for kubectl-getinfo
 
 _kubectl_getinfo() {
-    local -a commands scheduling_subcommands resource_types output_formats
-    
-    commands=(
+    local curcontext="$curcontext" state line
+    typeset -A opt_args
+
+    local -a commands=(
         'labels:List labels of resources'
         'annotations:List annotations of resources'
         'owner:List ownerReferences of resources'
         'scheduling:List scheduling-related fields'
         'completion:Generate shell completion scripts'
     )
-    
-    scheduling_subcommands=(
+
+    local -a scheduling_subcommands=(
         'tolerations:List only tolerations'
         'affinity:List only affinity rules'
         'nodeselector:List only nodeSelector'
@@ -176,116 +177,113 @@ _kubectl_getinfo() {
         'priority:List only priority-related fields'
         'runtime:List only runtime-related fields'
     )
-    
-    resource_types=(
-        'pods' 'po'
-        'deployments' 'deploy'
-        'services' 'svc'
-        'nodes' 'no'
-        'configmaps' 'cm'
-        'secrets' 'sec'
-        'statefulsets' 'sts'
-        'daemonsets' 'ds'
-        'replicasets' 'rs'
-        'ingresses' 'ing'
-        'jobs'
-        'cronjobs' 'cj'
-        'persistentvolumes' 'pv'
-        'persistentvolumeclaims' 'pvc'
-        'namespaces' 'ns'
-        'serviceaccounts' 'sa'
-        'endpoints' 'ep'
-        'events' 'ev'
-        'networkpolicies' 'netpol'
+
+    local -a resource_types=(
+        'pods:Pod resources'
+        'po:Pod resources (short)'
+        'deployments:Deployment resources'
+        'deploy:Deployment resources (short)'
+        'services:Service resources'
+        'svc:Service resources (short)'
+        'nodes:Node resources'
+        'no:Node resources (short)'
+        'configmaps:ConfigMap resources'
+        'cm:ConfigMap resources (short)'
+        'secrets:Secret resources'
+        'statefulsets:StatefulSet resources'
+        'sts:StatefulSet resources (short)'
+        'daemonsets:DaemonSet resources'
+        'ds:DaemonSet resources (short)'
+        'replicasets:ReplicaSet resources'
+        'rs:ReplicaSet resources (short)'
+        'ingresses:Ingress resources'
+        'ing:Ingress resources (short)'
+        'jobs:Job resources'
+        'cronjobs:CronJob resources'
+        'cj:CronJob resources (short)'
+        'persistentvolumes:PersistentVolume resources'
+        'pv:PersistentVolume resources (short)'
+        'persistentvolumeclaims:PersistentVolumeClaim resources'
+        'pvc:PersistentVolumeClaim resources (short)'
+        'namespaces:Namespace resources'
+        'ns:Namespace resources (short)'
+        'serviceaccounts:ServiceAccount resources'
+        'sa:ServiceAccount resources (short)'
     )
-    
-    output_formats=('json' 'yaml' 'table')
 
     _arguments -C \
         '1: :->command' \
         '2: :->second' \
         '3: :->third' \
-        '*: :->args' \
-        && return
+        '*:: :->args'
 
     case $state in
         command)
-            _describe -t commands 'kubectl-getinfo commands' commands
+            _describe -t commands 'command' commands
             ;;
         second)
-            case $words[2] in
+            case $line[1] in
                 completion)
-                    _values 'shell' bash zsh fish
+                    local -a shells=('bash:Bash shell' 'zsh:Zsh shell' 'fish:Fish shell')
+                    _describe -t shells 'shell' shells
                     ;;
                 scheduling)
-                    _alternative \
-                        'subcommands:scheduling subcommand:_describe -t scheduling-subcommands "scheduling subcommands" scheduling_subcommands' \
-                        'resources:resource type:compadd -a resource_types'
+                    _describe -t scheduling-subcommands 'subcommand or resource' scheduling_subcommands resource_types
                     ;;
                 labels|annotations|owner)
-                    _describe -t resources 'resource types' resource_types
+                    _describe -t resources 'resource type' resource_types
                     ;;
             esac
             ;;
         third)
-            if [[ $words[2] == "scheduling" ]]; then
-                # Check if second word is a subcommand
-                case $words[3] in
-                    tolerations|affinity|nodeselector|resources|topology|priority|runtime)
-                        _describe -t resources 'resource types' resource_types
-                        ;;
-                    *)
-                        _arguments \
-                            '-n[Namespace]:namespace:_kubectl_getinfo_namespaces' \
-                            '--namespace[Namespace]:namespace:_kubectl_getinfo_namespaces' \
-                            '-A[All namespaces]' \
-                            '--all-namespaces[All namespaces]' \
-                            '-l[Label selector]:selector:' \
-                            '--selector[Label selector]:selector:' \
-                            '-o[Output format]:format:(json yaml table)' \
-                            '--output[Output format]:format:(json yaml table)' \
-                            '-c[Colorize output]' \
-                            '--color[Colorize output]' \
-                            '*:resource name:'
-                        ;;
-                esac
-            else
-                _arguments \
-                    '-n[Namespace]:namespace:_kubectl_getinfo_namespaces' \
-                    '--namespace[Namespace]:namespace:_kubectl_getinfo_namespaces' \
-                    '-A[All namespaces]' \
-                    '--all-namespaces[All namespaces]' \
-                    '-l[Label selector]:selector:' \
-                    '--selector[Label selector]:selector:' \
-                    '-o[Output format]:format:(json yaml table)' \
-                    '--output[Output format]:format:(json yaml table)' \
-                    '-c[Colorize output]' \
-                    '--color[Colorize output]' \
-                    '*:resource name:'
-            fi
+            case $line[1] in
+                scheduling)
+                    case $line[2] in
+                        tolerations|affinity|nodeselector|resources|topology|priority|runtime)
+                            _describe -t resources 'resource type' resource_types
+                            ;;
+                        *)
+                            _kubectl_getinfo_flags
+                            ;;
+                    esac
+                    ;;
+                *)
+                    _kubectl_getinfo_flags
+                    ;;
+            esac
             ;;
         args)
-            _arguments \
-                '-n[Namespace]:namespace:_kubectl_getinfo_namespaces' \
-                '--namespace[Namespace]:namespace:_kubectl_getinfo_namespaces' \
-                '-A[All namespaces]' \
-                '--all-namespaces[All namespaces]' \
-                '-l[Label selector]:selector:' \
-                '--selector[Label selector]:selector:' \
-                '-o[Output format]:format:(json yaml table)' \
-                '--output[Output format]:format:(json yaml table)' \
-                '-c[Colorize output]' \
-                '--color[Colorize output]' \
-                '*:resource name:'
+            _kubectl_getinfo_flags
             ;;
     esac
 }
 
+_kubectl_getinfo_flags() {
+    _arguments \
+        '-n[Specify namespace]:namespace:_kubectl_getinfo_namespaces' \
+        '--namespace[Specify namespace]:namespace:_kubectl_getinfo_namespaces' \
+        '-A[All namespaces]' \
+        '--all-namespaces[All namespaces]' \
+        '-l[Label selector]:selector:' \
+        '--selector[Label selector]:selector:' \
+        '-o[Output format]:format:_kubectl_getinfo_output' \
+        '--output[Output format]:format:_kubectl_getinfo_output' \
+        '-c[Colorize output]' \
+        '--color[Colorize output]' \
+        '-h[Show help]' \
+        '--help[Show help]' \
+        '*:resource name:'
+}
+
+_kubectl_getinfo_output() {
+    local -a formats=('json:JSON format' 'yaml:YAML format' 'table:Table format')
+    _describe -t formats 'output format' formats
+}
+
 _kubectl_getinfo_namespaces() {
-    local namespaces
-    if namespaces=($(kubectl get namespaces -o jsonpath='{.items[*].metadata.name}' 2>/dev/null)); then
-        _describe -t namespaces 'namespaces' namespaces
-    fi
+    local -a namespaces
+    namespaces=(${(f)"$(kubectl get namespaces -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' 2>/dev/null)"})
+    _describe -t namespaces 'namespace' namespaces
 }
 
 compdef _kubectl_getinfo kubectl-getinfo
