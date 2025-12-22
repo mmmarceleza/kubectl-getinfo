@@ -10,35 +10,46 @@ Download the latest binary for your platform from the [Releases page](https://gi
 
 **Linux (amd64):**
 ```bash
-curl -LO https://github.com/mmmarceleza/kubectl-getinfo/releases/latest/download/kubectl-getinfo_$(curl -s https://api.github.com/repos/mmmarceleza/kubectl-getinfo/releases/latest | grep tag_name | cut -d '"' -f 4)_linux_amd64.tar.gz
-tar -xzf kubectl-getinfo_*.tar.gz
+VERSION=$(curl -s https://api.github.com/repos/mmmarceleza/kubectl-getinfo/releases/latest | grep tag_name | cut -d '"' -f 4)
+curl -LO "https://github.com/mmmarceleza/kubectl-getinfo/releases/download/${VERSION}/kubectl-getinfo_${VERSION#v}_linux_amd64.tar.gz"
+tar -xzf kubectl-getinfo_${VERSION#v}_linux_amd64.tar.gz
 sudo mv kubectl-getinfo /usr/local/bin/
 ```
 
 **Linux (arm64):**
 ```bash
-curl -LO https://github.com/mmmarceleza/kubectl-getinfo/releases/latest/download/kubectl-getinfo_$(curl -s https://api.github.com/repos/mmmarceleza/kubectl-getinfo/releases/latest | grep tag_name | cut -d '"' -f 4)_linux_arm64.tar.gz
-tar -xzf kubectl-getinfo_*.tar.gz
+VERSION=$(curl -s https://api.github.com/repos/mmmarceleza/kubectl-getinfo/releases/latest | grep tag_name | cut -d '"' -f 4)
+curl -LO "https://github.com/mmmarceleza/kubectl-getinfo/releases/download/${VERSION}/kubectl-getinfo_${VERSION#v}_linux_arm64.tar.gz"
+tar -xzf kubectl-getinfo_${VERSION#v}_linux_arm64.tar.gz
 sudo mv kubectl-getinfo /usr/local/bin/
 ```
 
 **macOS (amd64):**
 ```bash
-curl -LO https://github.com/mmmarceleza/kubectl-getinfo/releases/latest/download/kubectl-getinfo_$(curl -s https://api.github.com/repos/mmmarceleza/kubectl-getinfo/releases/latest | grep tag_name | cut -d '"' -f 4)_darwin_amd64.tar.gz
-tar -xzf kubectl-getinfo_*.tar.gz
+VERSION=$(curl -s https://api.github.com/repos/mmmarceleza/kubectl-getinfo/releases/latest | grep tag_name | cut -d '"' -f 4)
+curl -LO "https://github.com/mmmarceleza/kubectl-getinfo/releases/download/${VERSION}/kubectl-getinfo_${VERSION#v}_darwin_amd64.tar.gz"
+tar -xzf kubectl-getinfo_${VERSION#v}_darwin_amd64.tar.gz
 sudo mv kubectl-getinfo /usr/local/bin/
 ```
 
 **macOS (arm64 / Apple Silicon):**
 ```bash
-curl -LO https://github.com/mmmarceleza/kubectl-getinfo/releases/latest/download/kubectl-getinfo_$(curl -s https://api.github.com/repos/mmmarceleza/kubectl-getinfo/releases/latest | grep tag_name | cut -d '"' -f 4)_darwin_arm64.tar.gz
-tar -xzf kubectl-getinfo_*.tar.gz
+VERSION=$(curl -s https://api.github.com/repos/mmmarceleza/kubectl-getinfo/releases/latest | grep tag_name | cut -d '"' -f 4)
+curl -LO "https://github.com/mmmarceleza/kubectl-getinfo/releases/download/${VERSION}/kubectl-getinfo_${VERSION#v}_darwin_arm64.tar.gz"
+tar -xzf kubectl-getinfo_${VERSION#v}_darwin_arm64.tar.gz
 sudo mv kubectl-getinfo /usr/local/bin/
 ```
 
-**Windows:**
+**Windows (PowerShell):**
+```powershell
+$VERSION = (Invoke-RestMethod https://api.github.com/repos/mmmarceleza/kubectl-getinfo/releases/latest).tag_name
+$VERSION_NUM = $VERSION -replace '^v', ''
+Invoke-WebRequest -Uri "https://github.com/mmmarceleza/kubectl-getinfo/releases/download/$VERSION/kubectl-getinfo_${VERSION_NUM}_windows_amd64.zip" -OutFile "kubectl-getinfo.zip"
+Expand-Archive -Path "kubectl-getinfo.zip" -DestinationPath "."
+Move-Item -Path "kubectl-getinfo.exe" -Destination "$env:USERPROFILE\bin\"
+```
 
-Download the `.zip` file from the [Releases page](https://github.com/mmmarceleza/kubectl-getinfo/releases/latest), extract it, and add `kubectl-getinfo.exe` to your PATH.
+> **Note:** Make sure `$env:USERPROFILE\bin\` is in your PATH, or move the binary to another directory in your PATH.
 
 ### Build from Source
 
