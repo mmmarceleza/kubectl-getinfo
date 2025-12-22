@@ -68,6 +68,42 @@ sudo mv kubectl-getinfo /usr/local/bin/
 kubectl getinfo --help
 ```
 
+## Shell Completion
+
+Enable tab completion for commands, resource types, and flags.
+
+**Bash:**
+```bash
+# Add to ~/.bashrc
+source <(kubectl-getinfo completion bash)
+
+# Or install system-wide
+kubectl-getinfo completion bash | sudo tee /etc/bash_completion.d/kubectl-getinfo > /dev/null
+```
+
+**Zsh:**
+```bash
+# Add to ~/.zshrc
+source <(kubectl-getinfo completion zsh)
+
+# Or if using Oh My Zsh, save to completions directory
+kubectl-getinfo completion zsh > ~/.oh-my-zsh/completions/_kubectl-getinfo
+```
+
+**Fish:**
+```fish
+# Add to ~/.config/fish/config.fish
+kubectl-getinfo completion fish | source
+
+# Or save to completions directory
+kubectl-getinfo completion fish > ~/.config/fish/completions/kubectl-getinfo.fish
+```
+
+After adding the completion script, restart your shell or source your profile:
+```bash
+source ~/.bashrc  # or ~/.zshrc
+```
+
 ## Shell Aliases (Optional)
 
 For faster command execution, you can use the provided shell aliases file (`.getinfo_aliases`):

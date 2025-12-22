@@ -14,6 +14,7 @@ Commands:
   annotations  List annotations of resources
   owner        List ownerReferences of resources
   scheduling   List scheduling-related fields (nodeSelector, affinity, tolerations, etc.)
+  completion   Generate shell completion scripts (bash, zsh, fish)
 
 Scheduling Subcommands (optional):
   tolerations       List only tolerations

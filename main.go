@@ -125,6 +125,12 @@ func main() {
 
 	// Parse command type
 	cmdType := os.Args[1]
+
+	// Handle completion command
+	if cmdType == "completion" {
+		handleCompletion(os.Args[2:])
+		os.Exit(0)
+	}
 	var subCommand string
 	var resourceType string
 	var argsOffset int
@@ -165,7 +171,7 @@ func main() {
 	} else {
 		// Other commands (labels, annotations, owner)
 		if cmdType != "labels" && cmdType != "annotations" && cmdType != "owner" {
-			fmt.Fprintf(os.Stderr, "Error: command type must be 'labels', 'annotations', 'owner', or 'scheduling', got '%s'\n", cmdType)
+			fmt.Fprintf(os.Stderr, "Error: command type must be 'labels', 'annotations', 'owner', 'scheduling', or 'completion', got '%s'\n", cmdType)
 			printUsage()
 			os.Exit(1)
 		}
