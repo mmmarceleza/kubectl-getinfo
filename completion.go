@@ -243,9 +243,12 @@ _kubectl_getinfo() {
                             _describe -t resources 'resource type' resource_types
                             ;;
                         *)
-                            _kubectl_getinfo_flags
+                            _kubectl_getinfo_complete_with_resources $line[2]
                             ;;
                     esac
+                    ;;
+                labels|annotations|owner)
+                    _kubectl_getinfo_complete_with_resources $line[2]
                     ;;
                 *)
                     _kubectl_getinfo_flags
@@ -253,9 +256,64 @@ _kubectl_getinfo() {
             esac
             ;;
         args)
-            _kubectl_getinfo_flags
+            # Determine the resource type from the command line
+            local resource_type=""
+            case $line[1] in
+                labels|annotations|owner)
+                    resource_type=$line[2]
+                    ;;
+                scheduling)
+                    case $line[2] in
+                        tolerations|affinity|nodeselector|resources|topology|priority|runtime)
+                            resource_type=$line[3]
+                            ;;
+                        *)
+                            resource_type=$line[2]
+                            ;;
+                    esac
+                    ;;
+            esac
+            _kubectl_getinfo_complete_with_resources $resource_type
             ;;
     esac
+}
+
+# Complete flags and resource names
+_kubectl_getinfo_complete_with_resources() {
+    # Extract resource type from words array (more reliable than $line)
+    local resource_type=""
+    local cmd=${words[2]}
+    
+    case $cmd in
+        labels|annotations|owner)
+            resource_type=${words[3]}
+            ;;
+        scheduling)
+            case ${words[3]} in
+                tolerations|affinity|nodeselector|resources|topology|priority|runtime)
+                    resource_type=${words[4]}
+                    ;;
+                *)
+                    resource_type=${words[3]}
+                    ;;
+            esac
+            ;;
+    esac
+
+    _arguments \
+        '-n[Specify namespace]:namespace:_kubectl_getinfo_namespaces' \
+        '--namespace[Specify namespace]:namespace:_kubectl_getinfo_namespaces' \
+        '-A[All namespaces]' \
+        '--all-namespaces[All namespaces]' \
+        '-l[Label selector]:selector:' \
+        '--selector[Label selector]:selector:' \
+        '-o[Output format]:format:_kubectl_getinfo_output' \
+        '--output[Output format]:format:_kubectl_getinfo_output' \
+        '-c[Colorize output]' \
+        '--color[Colorize output]' \
+        '-h[Show help]' \
+        '--help[Show help]' \
+        "*:resource name:_kubectl_getinfo_resource_names $resource_type"
 }
 
 _kubectl_getinfo_flags() {
@@ -284,6 +342,76 @@ _kubectl_getinfo_namespaces() {
     local -a namespaces
     namespaces=(${(f)"$(kubectl get namespaces -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' 2>/dev/null)"})
     _describe -t namespaces 'namespace' namespaces
+}
+
+# Fetch resource names dynamically from the cluster
+_kubectl_getinfo_resource_names() {
+    # Extract resource type from words array directly (more reliable than $1)
+    local resource_type=""
+    local cmd=${words[2]}
+    
+    case $cmd in
+        labels|annotations|owner)
+            resource_type=${words[3]}
+            ;;
+        scheduling)
+            case ${words[3]} in
+                tolerations|affinity|nodeselector|resources|topology|priority|runtime)
+                    resource_type=${words[4]}
+                    ;;
+                *)
+                    resource_type=${words[3]}
+                    ;;
+            esac
+            ;;
+    esac
+    
+    [[ -z "$resource_type" ]] && return
+
+    # Normalize resource type (handle short names)
+    case $resource_type in
+        po) resource_type="pods" ;;
+        deploy) resource_type="deployments" ;;
+        svc) resource_type="services" ;;
+        no) resource_type="nodes" ;;
+        cm) resource_type="configmaps" ;;
+        sec) resource_type="secrets" ;;
+        sts) resource_type="statefulsets" ;;
+        ds) resource_type="daemonsets" ;;
+        rs) resource_type="replicasets" ;;
+        ing) resource_type="ingresses" ;;
+        cj) resource_type="cronjobs" ;;
+        pv) resource_type="persistentvolumes" ;;
+        pvc) resource_type="persistentvolumeclaims" ;;
+        ns) resource_type="namespaces" ;;
+        sa) resource_type="serviceaccounts" ;;
+        ep) resource_type="endpoints" ;;
+        ev) resource_type="events" ;;
+        netpol) resource_type="networkpolicies" ;;
+    esac
+
+    # Build namespace argument
+    local namespace_arg=""
+    local i
+    for ((i=1; i<${#words[@]}; i++)); do
+        case ${words[i]} in
+            -n|--namespace)
+                if [[ -n "${words[i+1]}" && "${words[i+1]}" != -* ]]; then
+                    namespace_arg="-n ${words[i+1]}"
+                fi
+                ;;
+            -A|--all-namespaces)
+                namespace_arg="-A"
+                ;;
+        esac
+    done
+
+    local -a names
+    names=(${(f)"$(kubectl get $resource_type $namespace_arg -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' 2>/dev/null)"})
+    
+    if [[ ${#names[@]} -gt 0 ]]; then
+        _describe -t resources "resource name" names
+    fi
 }
 
 compdef _kubectl_getinfo kubectl-getinfo
