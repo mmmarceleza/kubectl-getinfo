@@ -199,6 +199,12 @@ func main() {
 	var outputFormat string
 	var colorOutput bool
 
+	// Determine default output format based on command type
+	defaultFormat := "yaml"
+	if cmdType == "owner" {
+		defaultFormat = "table"
+	}
+
 	fs := flag.NewFlagSet("getinfo", flag.ExitOnError)
 	fs.StringVar(&namespace, "n", "", "namespace")
 	fs.StringVar(&namespace, "namespace", "", "namespace")
@@ -206,8 +212,8 @@ func main() {
 	fs.BoolVar(&allNamespaces, "all-namespaces", false, "all-namespaces")
 	fs.StringVar(&selector, "l", "", "selector")
 	fs.StringVar(&selector, "selector", "", "selector")
-	fs.StringVar(&outputFormat, "o", "json", "output format (json, yaml, table)")
-	fs.StringVar(&outputFormat, "output", "json", "output format (json, yaml, table)")
+	fs.StringVar(&outputFormat, "o", defaultFormat, "output format (json, yaml, table)")
+	fs.StringVar(&outputFormat, "output", defaultFormat, "output format (json, yaml, table)")
 	fs.BoolVar(&colorOutput, "c", false, "colorize JSON output")
 	fs.BoolVar(&colorOutput, "color", false, "colorize JSON output")
 
@@ -304,6 +310,13 @@ func main() {
 
 	// Output in requested format
 	outputFormat = strings.ToLower(outputFormat)
+
+	// Validate table format is only for owner command
+	if outputFormat == "table" && cmdType != "owner" {
+		fmt.Fprintf(os.Stderr, "Error: table format is only supported for 'owner' command. Supported formats: json, yaml\n")
+		os.Exit(1)
+	}
+
 	switch outputFormat {
 	case "json":
 		jsonOutput, err := json.MarshalIndent(output, "", "  ")
@@ -327,7 +340,11 @@ func main() {
 	case "table":
 		printTable(output, cmdType, subCommand, namespaced)
 	default:
-		fmt.Fprintf(os.Stderr, "Error: unsupported output format '%s'. Supported formats: json, yaml, table\n", outputFormat)
+		if cmdType == "owner" {
+			fmt.Fprintf(os.Stderr, "Error: unsupported output format '%s'. Supported formats: json, yaml, table\n", outputFormat)
+		} else {
+			fmt.Fprintf(os.Stderr, "Error: unsupported output format '%s'. Supported formats: json, yaml\n", outputFormat)
+		}
 		os.Exit(1)
 	}
 }

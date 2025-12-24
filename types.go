@@ -7,6 +7,13 @@ type OwnerReference struct {
 	Name      string `json:"name"`
 }
 
+// ContainerResources represents resource requests and limits for a single container
+type ContainerResources struct {
+	Name     string                 `json:"name" yaml:"name"`
+	Requests map[string]interface{} `json:"requests,omitempty" yaml:"requests,omitempty"`
+	Limits   map[string]interface{} `json:"limits,omitempty" yaml:"limits,omitempty"`
+}
+
 // SchedulingInfo contains scheduling-related fields from a pod spec
 type SchedulingInfo struct {
 	NodeSelector              map[string]string      `json:"nodeSelector,omitempty" yaml:"nodeSelector,omitempty"`
@@ -38,7 +45,7 @@ type OutputItem struct {
 	Tolerations               []interface{}          `json:"tolerations,omitempty" yaml:"tolerations,omitempty"`
 	Affinity                  map[string]interface{} `json:"affinity,omitempty" yaml:"affinity,omitempty"`
 	NodeSelector              map[string]string      `json:"nodeSelector,omitempty" yaml:"nodeSelector,omitempty"`
-	Resources                 map[string]interface{} `json:"resources,omitempty" yaml:"resources,omitempty"`
+	Resources                 []ContainerResources   `json:"resources,omitempty" yaml:"resources,omitempty"`
 	TopologySpreadConstraints []interface{}          `json:"topologySpreadConstraints,omitempty" yaml:"topologySpreadConstraints,omitempty"`
 	Priority                  map[string]interface{} `json:"priority,omitempty" yaml:"priority,omitempty"`
 	Runtime                   map[string]interface{} `json:"runtime,omitempty" yaml:"runtime,omitempty"`

@@ -311,7 +311,7 @@ func printTable(output Output, cmdType string, subCommand string, namespaced boo
 					}
 				case "resources":
 					if len(item.Resources) > 0 {
-						valueStr = "present"
+						valueStr = fmt.Sprintf("%d container(s)", len(item.Resources))
 					} else {
 						valueStr = "<none>"
 					}

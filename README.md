@@ -132,7 +132,7 @@ This provides 735+ aliases like:
 - `t/af/ns/r` = tolerations/affinity/nodeselector/resources (scheduling subcommands)
 - `p/d/svc/no/sts/ds` = pods/deploy/services/nodes/statefulsets/daemonsets
 - `A/n/l` = -A (all namespaces) / -n (namespace) / -l (selector)
-- `oyaml/ojson/otable` = output format
+- `oyaml/ojson` = output format (`otable` for owner only)
 
 ## Short Names Support
 
@@ -177,7 +177,7 @@ Where:
 - `-n, --namespace <namespace>` - Specify namespace
 - `-A, --all-namespaces` - All namespaces
 - `-l, --selector <selector>` - Filter by label selector (e.g., `-l app=nginx`)
-- `-o, --output <format>` - Output format: `json` (default), `yaml`, or `table`
+- `-o, --output <format>` - Output format: `json`, `yaml` (default), or `table` (owner command only)
 - `-c, --color` - Colorize JSON output (JSON format only)
 - `-h, --help` - Show help (context-aware)
 
@@ -251,9 +251,9 @@ kubectl getinfo annotations prometheus -n monitoring
 kubectl getinfo labels mycustomresource
 
 # Using different output formats
-kubectl getinfo labels pods -o yaml
-kubectl getinfo labels pods -o table
-kubectl getinfo labels pods -o json  # default
+kubectl getinfo labels pods -o yaml  # default
+kubectl getinfo labels pods -o json
+kubectl getinfo owner pods -o table  # table only available for owner command
 
 # JSON with colors (similar to jq)
 kubectl getinfo labels pods -o json -c
@@ -262,6 +262,9 @@ kubectl getinfo labels pods -o json -c
 ## Output Formats
 
 The plugin supports three output formats, controlled by the `-o` or `--output` flag:
+
+- **json** and **yaml**: Available for all commands (`labels`, `annotations`, `owner`, `scheduling`)
+- **table**: Only available for the `owner` command
 
 ### JSON (default)
 
@@ -299,20 +302,9 @@ items:
       version: "1.0"
 ```
 
-### Table
+### Table (owner command only)
 
-```bash
-kubectl getinfo labels pods -o table
-```
-
-```
-NAME        NAMESPACE    LABELS
-pod-name    default      app=nginx,version=1.0
-```
-
-For annotations, the format is similar, but uses the `annotations` field instead of `labels`.
-
-For ownerReferences:
+The table format is only available for the `owner` command, as it provides a compact view of owner references:
 
 ```bash
 kubectl getinfo owner pods -o table

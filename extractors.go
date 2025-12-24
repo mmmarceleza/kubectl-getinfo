@@ -226,40 +226,36 @@ func extractSchedulingSubcommand(item unstructured.Unstructured, outputItem *Out
 			outputItem.NodeSelector = nodeSelector
 		}
 	case "resources":
-		resources := make(map[string]interface{})
+		var containerResources []ContainerResources
 		if containers, found, _ := unstructured.NestedSlice(item.Object, append(specPath, "containers")...); found {
-			requests := make(map[string]interface{})
-			limits := make(map[string]interface{})
-
 			for _, container := range containers {
 				containerMap, ok := container.(map[string]interface{})
 				if !ok {
 					continue
 				}
 
+				containerName, _ := containerMap["name"].(string)
+				cr := ContainerResources{
+					Name: containerName,
+				}
+
 				if res, ok := containerMap["resources"].(map[string]interface{}); ok {
-					if req, ok := res["requests"].(map[string]interface{}); ok {
-						for k, v := range req {
-							requests[k] = v
-						}
+					if req, ok := res["requests"].(map[string]interface{}); ok && len(req) > 0 {
+						cr.Requests = req
 					}
-					if lim, ok := res["limits"].(map[string]interface{}); ok {
-						for k, v := range lim {
-							limits[k] = v
-						}
+					if lim, ok := res["limits"].(map[string]interface{}); ok && len(lim) > 0 {
+						cr.Limits = lim
 					}
 				}
-			}
 
-			if len(requests) > 0 {
-				resources["requests"] = requests
-			}
-			if len(limits) > 0 {
-				resources["limits"] = limits
+				// Only add container if it has any resources defined
+				if cr.Requests != nil || cr.Limits != nil {
+					containerResources = append(containerResources, cr)
+				}
 			}
 		}
-		if len(resources) > 0 {
-			outputItem.Resources = resources
+		if len(containerResources) > 0 {
+			outputItem.Resources = containerResources
 		}
 	case "topology":
 		if topology, found, _ := unstructured.NestedSlice(item.Object, append(specPath, "topologySpreadConstraints")...); found && len(topology) > 0 {
